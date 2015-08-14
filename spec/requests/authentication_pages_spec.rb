@@ -46,7 +46,6 @@ describe "Authentication" do
 
 
 
-
 end
  #rails generate integration_test authentication_pages
 # describe "AuthenticationPages" do
