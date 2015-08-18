@@ -90,21 +90,35 @@ describe "remember token" do
     its(:remember_token) { should_not be_blank }
 end
 
-describe "edit" do
-    let(:user) { FactoryGirl.create(:user) }
-    before { visit edit_user_path(user) }
+# describe "edit" do
+#     let(:user) { FactoryGirl.create(:user) }
+#     before { visit edit_user_path(user) }
 
-    describe "page" do
-      it { should have_content("Update your profile") }
-      it { should have_title("Edit user") }
-      it { should have_link('change', href: 'http://gravatar.com/emails') }
+#     describe "page" do
+#       it { should have_content("Update your profile") }
+#       it { should have_title("Edit user") }
+#       it { should have_link('change', href: 'http://gravatar.com/emails') }
+#     end
+
+#     describe "with invalid information" do
+#       before { click_button "Save changes" }
+
+#       it { should have_content('error') }
+#     end
+#   end
+  it { should respond_to(:authenticate) }
+  it { should respond_to(:admin) }
+
+  it { should be_valid }
+  it { should_not be_admin }
+
+  describe "with admin attribute set to 'true'" do
+    before do
+      @user.save!
+      @user.toggle!(:admin)
     end
 
-    describe "with invalid information" do
-      before { click_button "Save changes" }
-
-      it { should have_content('error') }
-    end
+    it { should be_admin }
   end
 
 end
